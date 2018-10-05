@@ -17,8 +17,8 @@ var
     secR = prompt ("Введите обязательную статью расходов в этом месяце"),
     secO = prompt ("Во сколько обойдется?");
 
-appData.expenses.firR=firO;
-appData.expenses.secR=secO;
+appData.expenses[firR]=firO;
+appData.expenses[secR]=secO;
 
 alert(appData.budzhet/30);
 
