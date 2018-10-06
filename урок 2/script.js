@@ -1,9 +1,9 @@
 'use strict';
-var money=+prompt("Ваш бюджет на месяц?","");
-var time=prompt("Введите дату в формате YYYY-MM-DD","");
+var money = +prompt("Ваш бюджет на месяц?","");
+var time = prompt("Введите дату в формате YYYY-MM-DD","");
 
 
-var appData={
+var appData = {
     budzhet:money,
     timeData:time,
     expenses:{},
@@ -11,15 +11,20 @@ var appData={
     income:[],
     saving:false
 }
-for (let i=0;i<2;i++){
+
+for ( let i = 0;i<2;i++){
     
     var firR = prompt ("Введите обязательную статью расходов в этом месяце");
     var firO = prompt ("Во сколько обойдется?");
-    if ( typeof(firR) !=null && typeof(firO) !=null && firO !='' && firR !='' ){
-appData.expenses[firR]=firO;
+    console.log( typeof(firR) );
+    console.log( typeof(firO) );
+    
+    if ( typeof(firR) != 'object' && typeof(firO) != 'object' && firO != '' && firR!= ''){
+appData.expenses[firR] = firO;
 console.log("Всё нормально");
     }  
     else{
+        console.log( "что то не так" );
 alert("Вы не ввели значения в область или ввели недопустимые. Введите заново");
 i--;
     }
@@ -34,7 +39,7 @@ i--;
 
 //     var firR = prompt ("Введите обязательную статью расходов в этом месяце");
 //     var firO = prompt ("Во сколько обойдется?");
-//     if ( typeof(firR) !=null && typeof(firO) !=null && firO !='' && firR !='' ){
+//     if ( typeof(firR) != 'object' && typeof(firO) != 'object' && firO !='' && firR !='' ){
 //         appData.expenses[firR]=firO;
 //         console.log("Всё нормально");
 //     }
@@ -52,7 +57,7 @@ i--;
 
 //     var firR = prompt ("Введите обязательную статью расходов в этом месяце");
 //     var firO = prompt ("Во сколько обойдется?");
-//     if ( typeof(firR) !=null && typeof(firO) !=null && firO !='' && firR !='' ){
+//     if ( typeof(firR) != 'object' && typeof(firO) != 'object' && firO !='' && firR !='' ){
 //         appData.expenses[firR]=firO;
 //         console.log("Всё нормально");
 //     }
