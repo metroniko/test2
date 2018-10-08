@@ -1,6 +1,6 @@
 'use strict';
-var money;
-var time ;
+let money;
+let time ;
 function start(){
      money = +prompt("Ваш бюджет на месяц?", "");
      time = prompt("Введите дату в формате YYYY-MM-DD", "");
@@ -10,7 +10,7 @@ function start(){
      }
 }
 start();
-var appData = {
+let appData = {
     budget:money,
     timeData:time,
     expenses:{},
@@ -22,10 +22,10 @@ var appData = {
 function chooseExpenses(){
     for ( let i = 0;i<2;i++){
     
-        var firR = prompt ("Введите обязательную статью расходов в этом месяце", "");
-        var firO = prompt ("Во сколько обойдется?", "");
+        let firR = prompt ("Введите обязательную статью расходов в этом месяце", "");
+        let firO = prompt ("Во сколько обойдется?", "");
       
-        if ( typeof(firR) != 'object' && typeof(firO) != 'object' && firO != '' && firR!= ''){
+        if ( firR != null  && firO != null && firO != '' && firR!= ''){
     appData.expenses[firR] = firO;
  
     if(typeof(firR) == 'string') {console.log("Это стринг");  } 
@@ -73,14 +73,16 @@ alert("Доход в месяц с вашего депозита: " + appData.mo
 }
 checkSavings();
  function chooseOptExpenses() {
-for(var i=1 ; i<4 ; i++){
-var exp= +prompt("Статья необязательных расходов?" );
-appData.optionalExpenses[i] = exp;
+for(let i=1 ; i<4 ; i++){
+let exp= +prompt("Статья необязательных расходов?" );
+    if ( exp != null && exp != ''){
+    appData.optionalExpenses[i] = exp;
 }
-
+    else{alert("Введите корректное значение ");
+    i--;
+}
  }
- 
-
-
+ }
+ chooseOptExpenses();
 
 
