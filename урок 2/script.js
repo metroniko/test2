@@ -4,7 +4,7 @@ var time = prompt("Введите дату в формате YYYY-MM-DD","");
 
 
 var appData = {
-    budzhet:money,
+    budget:money,
     timeData:time,
     expenses:{},
     optionalExpenses:{},
@@ -21,8 +21,9 @@ for ( let i = 0;i<2;i++){
     
     if ( typeof(firR) != 'object' && typeof(firO) != 'object' && firO != '' && firR!= ''){
 appData.expenses[firR] = firO;
-console.log("Всё нормально");
-    }  
+console.log("Всё нормально");  
+if(typeof(firR) == 'string') {console.log("Это стринг");  } 
+}
     else{
         console.log( "что то не так" );
 alert("Вы не ввели значения в область или ввели недопустимые. Введите заново");
@@ -68,7 +69,7 @@ i--;
 // while(temp2 < 2 )
 
 
-appData.moneyPerDay=(appData.budzhet/30);
+appData.moneyPerDay=(appData.budget/30);
 alert("Ежедневний бюджет = " + appData.moneyPerDay);
 
 if(appData.moneyPerDay <100 ){
