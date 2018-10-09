@@ -43,11 +43,11 @@ console.log(s);
 
  function lust(last){
 while (typeof(last) !="string") {
-    alert("вы ввели не строку");
-    last= prompt("введите строку ");
+    alert("вы ввели не строку" );
+    last= prompt("введите строку " );
 }
 let newlast = last.replace(/ /g, "");
-if(newlast.length>50){
+if(newlast.length > 50){
 
     let newlast2 = newlast.substring(0,50) + "...";
     console.log(newlast2 );
