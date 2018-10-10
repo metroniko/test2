@@ -1,8 +1,14 @@
 function getFriendlyNumbers(start, end) {
+  if( typeof(start) != "number" || typeof(end) != "number" ) {
+      console.log("VSE");
+        return false 
+      }
+  
 
     if(start > end || start < 0 || end < 0 || isInteger(start) == false || isInteger(end) == false 
      || start == null || end == null || start == "" || end == "" ){
-        return false ;}
+       console.log("VSE");
+        return false }
 
 
     let mass1= [];
@@ -15,21 +21,19 @@ function getFriendlyNumbers(start, end) {
             }
            }
         }
-      return mass1;
+        if (mass1.length == 0) {
+              console.log("Нет дружественных чисел []");
+            } else {
+                mass1.forEach(function(item){
+                    console.log(item + " "); 
+                    } );   
+             }
+  return mass1;
 } 
-let first = +prompt("Введите первое число");
-    second = +prompt("Введите второе число");
-    console.log(typeof(first));
 
-let mass2 =  getFriendlyNumbers(1,300);
 
-if (mass2.length == 0) {
-    console.log("Нет дружественных чисел []");
-  } else {
-      mass2.forEach(function(item){
-          console.log(item + " "); 
-          } );   
-  }
+getFriendlyNumbers(1,300) ;
+
    
 function sumDivisors(num){
     var sum = 0;
@@ -55,3 +59,17 @@ function sumDivisors(num){
 //     task: getFriendlyNumbers
 // }
 
+//   let mass2 = getFriendlyNumbers(1,300);
+// }
+// else 
+// {
+//   let mass2 = [] ;
+// }
+
+// if (mass2.length == 0) {
+//     console.log("Нет дружественных чисел []");
+//   } else {
+//       mass2.forEach(function(item){
+//           console.log(item + " "); 
+//           } );   
+//   }
