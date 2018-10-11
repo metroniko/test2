@@ -17,7 +17,7 @@ let appData = {
     optionalExpenses:{},
     income:[],
     saving:true,
-    chooseExpenses: function(){
+    chooseExpenses: function() {
         for (let i = 0; i < 2; i++) {
     
             let firR = prompt ("Введите обязательную статью расходов в этом месяце", "");
@@ -26,9 +26,8 @@ let appData = {
             if ( firR != null  && firO != null && firO != '' && firR!= ''){
         appData.expenses[firR] = firO;
      
-        if(typeof(firR) == 'string') {console.log("Это стринг");  } 
-        }
-            else{
+        if (typeof(firR) == 'string') {console.log("Это стринг");  } 
+        } else{
            
         alert("Вы не ввели значения в область или ввели недопустимые. Введите заново");
         i--;
@@ -41,23 +40,20 @@ let appData = {
 
     },
     detectDayBudget: function() {
-        if(appData.moneyPerDay <100 ){
+        if (appData.moneyPerDay <100 ){
             console.log("Минимальный уровень достатка");
-            }
-            else if (appData.moneyPerDay > 100 && appData.moneyPerDay <20000){
+            } else if (appData.moneyPerDay > 100 && appData.moneyPerDay <20000){
                 console.log("Средний  уровень достатка");
-            }
-            else{console.log("Выше среднего уровень достатка");}
+            } else {console.log("Выше среднего уровень достатка");}
     
     },
     detectLevel: function() {
         if(appData.moneyPerDay <100 ){
             console.log("Минимальный уровень достатка");
-            }
-            else if (appData.moneyPerDay > 100 && appData.moneyPerDay <20000){
+            } else if (appData.moneyPerDay > 100 && appData.moneyPerDay <20000){
                 console.log("Средний  уровень достатка");
-            }
-            else{console.log("Выше среднего уровень достатка");}
+            } else { console.log("Выше среднего уровень достатка");
+        }
     },
     checkSavings: function() {
         if(appData.saving == true){
@@ -73,8 +69,7 @@ let appData = {
             let exp= +prompt("Статья необязательных расходов?" );
                 if ( exp != null && exp != ''){
                 appData.optionalExpenses[i] = exp;
-            }
-                else{ alert("Введите корректное значение ");
+            } else { alert("Введите корректное значение ");
                 i--;
             }
              }
@@ -90,11 +85,12 @@ let appData = {
         appData.income.forEach(function(item,i){
         alert( "Способы доп. заработка: " + (i+1) + "-" + item);   
         });
+        for (let key in appData ){
+            console.log("Наша программа включает в себя данные: " + key );
+        }
     }
 }
-for(let key in appData ){
-    console.log("Наша программа включает в себя данные: " + key );
-}
+
 
 
 
