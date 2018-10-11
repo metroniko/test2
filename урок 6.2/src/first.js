@@ -6,10 +6,10 @@ let button = document.getElementById('start'),
     optionalexpensesValue = document.querySelector('.optionalexpenses-value'),
     monthsavingsValue = document.querySelector('.monthsavings-value'),
     yearsavingsValue = document.querySelector('.yearsavings-value'),
-    expensesItem = document.querySelectorALL('.expenses-item'),
+    expensesItem = document.getElementsByClassName('choose-expenses'),
     expensesItemBtn = document.getElementsByTagName('expenses-item-btn'),
     countBudgetBtn = document.getElementsByTagName('count-budget-btn'),
-    optionalexpensesItem = document.querySelectorALL('.optionalexpenses-item'),
+    optionalexpensesItem = document.querySelectorAll('.optionalexpenses-item'),
     chooseIncomeLabel = document.querySelector('.choose-income-label'),
     checkSavings = document.querySelector('.checksavings'),
     chooseSum = document.querySelector('.choose-sum'),
@@ -17,6 +17,7 @@ let button = document.getElementById('start'),
     year = document.querySelector('.year'),
     month = document.querySelector('.month'),
     day = document.querySelector('.day');
+    console.log(expensesItem);
  
 
     
