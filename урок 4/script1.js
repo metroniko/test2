@@ -25,13 +25,10 @@ let appData = {
           
             if ( firR != null  && firO != null && firO != '' && firR!= ''){
         appData.expenses[firR] = firO;
-     
-        if (typeof(firR) == 'string') {console.log("Это стринг");  } 
         }
             else {
-           
-        alert("Вы не ввели значения в область или ввели недопустимые. Введите заново");
-        i--;
+            alert("Вы не ввели значения в область или ввели недопустимые. Введите заново");
+            i--;
             }
         } 
     },
