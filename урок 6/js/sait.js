@@ -25,6 +25,6 @@ let menuItem = document.querySelectorAll('.menu-item'),
 
     menu.insertBefore(menuItem[2], menuItem[1]);
  
-    document.body.style.background = 'url(img/apple_true.jpg)';
+    document.body.style.backgroundImage = 'url(img/apple_true.jpg)';
 
   
