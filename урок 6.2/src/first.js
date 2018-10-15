@@ -24,13 +24,15 @@ let button = document.getElementById('start'),
     choosePercent = document.querySelector('.choose-percent'),
     year = document.querySelector('.year-value'),
     month = document.querySelector('.month-value'),
-    day = document.querySelector('.day-value'),
+    day = document.querySelector('.day-value');
     //получить с помощью.getElementsByClassName
-    q1 = expensesItem5[0],
-    q2 = expensesItem5[1],
-    q3 = expensesItem5[2],
-    q4 = expensesItem5[3];
-    console.log(q1);
-    console.log(q2);
-    console.log(q3);
-    console.log(q4);
+
+q1 = expensesItem5[0],
+q2 = expensesItem5[1],
+q3 = expensesItem5[2],
+q4 = expensesItem5[3];
+
+console.log(q1);
+console.log(q2);
+console.log(q3);
+console.log(q4);        
