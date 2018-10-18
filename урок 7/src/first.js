@@ -41,13 +41,13 @@ expensesItemBtn2.addEventListener('click', function(){
         let temp = 0;
         optionalexpensesValue.textContent = null;
         for (let i = 0 ; i < optionalexpensesItem.length ; i++){
-            let exp= optionalexpensesItem[i].value;
+            let exp= optionalexpensesItem[i].value.replace(/[^\йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]/ig,""); 
             if ( exp != null && exp != '') {
                 appData.optionalExpenses[i] = exp; 
                 optionalexpensesValue.textContent += appData.optionalExpenses[i] + " ";
             } else {   
                 console.log('костыль 2');    
-                // alert("Введите корректное значение "); 
+                // alert("Введите корректное значение (русскими буквами) "); 
                 temp++;  
             }
         }
@@ -73,7 +73,8 @@ expensesItemBtn.addEventListener('click',function() {
         for (let i = 0; i < expensesItemAll.length; i++) {
         
             let firR = expensesItemAll[i].value;
-            let firO = expensesItemAll[++i].value;
+            let firO = +expensesItemAll[++i].value.replace(/\D/g, '');
+         
         
             if ( firR != null  && firO != null && firO != '' && firR!= ''){
                 appData.expenses[firR] = firO;
@@ -156,7 +157,7 @@ countBudgetBtn.addEventListener('click', function() {
     if (appData.budget == undefined ) {
         console.log('костыль 1');
         countBudgetBtn.disabled = true;
-        expensesItemBtn.disabled = false; 
+        countBudgetBtn.disabled = false; 
     } else {
         if(appData.budget != undefined) {
             appData.moneyPerDay = ((appData.budget - +expensesValue.textContent) / 30).toFixed();
