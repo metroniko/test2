@@ -2,9 +2,11 @@ window.addEventListener('DOMContentLoaded', function() {
     'use strict';
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
-        tabContent = document.querySelectorAll('.info-tabcontent');
-
+        tabContent = document.querySelectorAll('.info-tabcontent'),
+        j = 0,
+        oneMone = document.querySelectorAll(".description-btn");
         hideTabContent(1);
+        
 
     function hideTabContent(a) {
         for (let i = a; i < tabContent.length; i++) {
@@ -21,20 +23,42 @@ window.addEventListener('DOMContentLoaded', function() {
         }
        
     }
+    oneMone[0].addEventListener('click', function() {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = "hidden";
+    });
+
+   
+    
+    
+
 
     info.addEventListener('click', function(event) {
         console.log("здесь");
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for(let i = 0; i <tab.length; i++) {
+                
                 if(target == tab[i]) {
+                    j = i;
                     hideTabContent(0);
                     showTabContent(i);
-                    break;
+                    break;   
                 }
+             
+
             }
+   
         }
+        oneMone[j].addEventListener('click', function() {
+            overlay.style.display = 'block';
+            this.classList.add('more-splash');
+            document.body.style.overflow = "hidden";
+        });
+       
     });
+
     // таймер
     let deadline = '2018-10-21';
     //рассчёт времемени до дедлайна
@@ -88,6 +112,7 @@ window.addEventListener('DOMContentLoaded', function() {
     let more = document.querySelector(".more"),
         overlay = document.querySelector(".overlay"),
         close = document.querySelector(".popup-close");
+        
     
         more.addEventListener('click', function() {
             overlay.style.display = 'block';
@@ -100,4 +125,9 @@ window.addEventListener('DOMContentLoaded', function() {
             more.classList.remove('more-splash');
             document.body.style.overflow = "";
         });
+    
+  
+
+
+    
 });
