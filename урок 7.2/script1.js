@@ -20,8 +20,15 @@ function animation() {
             
             i++;
             cercle.style.left =  i + "px";
-            cercle.style.top =  i + "px";  
+            cercle.style.top =  i + "px";
+             
         } 
+       
     }
+    cercle.style.left = 0;
+    cercle.style.top = 0;
+    t = 0;
+    z = 0; 
+    i = 300; 
 }  
 button.addEventListener ("click", animation); 

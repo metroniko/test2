@@ -11,14 +11,7 @@ class Options {
         div.innerHTML ='xhxhxhx';
         document.body.appendChild(div);
         console.log( this.height );
-        div.style.height = this.height ;
-        div.style.width = this.width;
-        div.style.background = this.bg;
-        div.style.fontSize = this.fontSize;
-        div.style.textAlign = this.textAlign;
-        // div.style.cssText = "width:" + this.width;
-        // div.style.cssText = "width:" + this.width + "height:" + this.height;
-        // div.style.cssText = 'height: this.height ; width: this.width; ' ;
+        div.style.cssText = `width: ${this.width}  ;  height: ${this.height}  ; background: ${this.bg} ; font-Size: ${this.fontSize}; text-Align: ${this.textAlign}; `;
        
     }
     

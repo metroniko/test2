@@ -9,10 +9,14 @@ let h = date.getHours(),
      
     if (m < 10) {
         m ="0" + m;
-     }
-     if (s < 10) {
+    }
+    if (s < 10) {
         s ="0" + s;
-     }
+    }
+    if (h < 10) {
+        h ="0" + h;
+    }
+
     hour.textContent = (h + ":"+ m + ":" + s);
     
     setInterval(hou, 1000); 
