@@ -129,7 +129,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         let message = {
             loading: 'Загрузка...',
-            success: 'Спасибо! Мы с вами свяжемся',
+            success: 'Спасибо! Мы с y вами свяжемся',
             failure: 'Что то не так'
 
         };
@@ -165,10 +165,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
     
             function funkForm(formm) {
+               
+                
+
                 formm.addEventListener('submit', function(event) {
 
-                
-               
+                 let inputAll = formm.getElementsByTagName('input'); 
+
                     event.preventDefault();
                     formm.appendChild(statusMessage2);
                     let request1 = new XMLHttpRequest();
@@ -195,8 +198,8 @@ window.addEventListener('DOMContentLoaded', function() {
                             statusMessage2.innerHTML = message.failure;
                         }
                     });
-                    for (let i = 0; i < input2.length; i++ ) {
-                        input2[i].value = '';
+                    for (let i = 0; i < inputAll.length; i++ ) {
+                        inputAll[i].value = '';
                     }
             
                 });   
