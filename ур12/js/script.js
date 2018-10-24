@@ -129,114 +129,80 @@ window.addEventListener('DOMContentLoaded', function() {
 
         let message = {
             loading: 'Загрузка...',
-            success: 'Спасибо! Скоро мы скоро с вами свяжемся',
+            success: 'Спасибо! ',
             failure: 'Что то не так'
 
         };
 
         let form = document.querySelector('.main-form'),
-            input = form.getElementsByTagName('input'),
+            input = form.getElementsByTagName('input')[0],
             statusMessage = document.createElement('div');
-
-       
-    
-  function sendForm(elem) {
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        form.appendChild(statusMessage);
-        let formData = new FormData(form);
-
-        function postData(data) {
-            return new Promise(function(resolve,reject) {
-                let request = new XMLHttpRequest ();
-                request.open('POST', 'server.php');
-                request.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
-
-                request.onreadystatechange = function(){
-                    if(request.readyState < 4) {
-                        resolve()
-                    } else if(request.readyState === 4 ) {
-                       if(request.status == 200 && request.status < 3) {
-                           resolve();
-                       } else {
-                        reject()
-                       }
-                    
-                    }
-
-                }
-                request.send(data);
-            });
-        }
-
-        function clearInput() {
-            for (let i = 0; i < input.length; i++ ) {
-                input[i].value = '';
-            }
-        }
-        postData(formData)
-        .then(()=> statusMessage.innerHTML = message.loading)
-        .then(() => statusMessage.innerHTML = message.success)
-        .catch(()=> statusMessage.innerHTML = message.loading.failure)
-        .then(clearInput)
-    });
-    }
-    sendForm(form);
-
-
-    let form2 = document.getElementById('form'),
+        let form2 = document.getElementById('form'),
             input2 = form2.getElementsByTagName('input'), 
             statusMessage2 = document.createElement('div');
 
 
-        sendForm2(form2);
-        input2[1].addEventListener('input', function() {
-        this.value = this.value.replace(/[^1-9+]/g, '');
-        });
 
-    function sendForm2(elem) {
+        inp(input2[1]);
+        inp(input);
 
-        form2.addEventListener('submit', function(event) {
-            event.preventDefault();
-            form2.appendChild(statusMessage2);
-            let formData2 = new FormData(form2);
-    
-            function postData(data) {
-                return new Promise(function(resolve,reject) {
-                    let request1 = new XMLHttpRequest ();
-                    request1.open('POST', 'server.php');
-                    request1.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
-    
-                    request1.onreadystatechange = function(){
-                        if(request1.readyState < 4) {
-                            resolve()
-                        } else if(request1.readyState === 4 ) {
-                           if(request1.status == 200 && request1.status < 3) {
-                               resolve();
-                           } else {
-                            reject()
-                           }
+
+        function inp(inpt) {
+            inpt.addEventListener('input', function() {
+            this.value = this.value.replace(/[^1-9]/g, '');
+            });
+
+        }
+        function mainFunc(form) {
+            let inputAll = form.getElementsByTagName('input'); 
+
+            function sendForm(elem) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    form.appendChild(statusMessage);
+                    let formData = new FormData(form);
+            
+                    function postData(data) {
                         
+                        return new Promise(function(resolve,reject) {
+                            let request = new XMLHttpRequest ();
+                            request.open('POST', 'server.php');
+                            request.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
+            
+                            request.onreadystatechange = function(){
+                                if(request.readyState < 4) {
+                                    resolve();
+                                } else if(request.readyState === 4 ) {
+                                   if(request.status == 200 && request.status < 3) {
+                                       resolve();
+                                   } else {
+                                    reject();
+                                   }
+                                
+                                }
+            
+                            }
+                            request.send(data);
+                        });
+                    }  
+                    postData(formData)
+                    .then(()=> statusMessage.innerHTML = message.loading)
+                    .then(() => statusMessage.innerHTML = message.success)
+                    .catch(()=> statusMessage.innerHTML = message.loading.failure)
+                    .then(clearInput);
+                    function clearInput() {
+                        for (let i = 0; i < inputAll.length; i++ ) {
+                            inputAll[i].value = '';
                         }
-    
                     }
-                    request1.send(data);
+
+                   
                 });
             }
-    
-            function clearInput() {
-                for (let i = 0; i < input2.length; i++ ) {
-                    input2[i].value = '';
-                }
-            }
-            postData(formData2)
-            .then(()=> statusMessage2.innerHTML = message.loading)
-            .then(() => statusMessage2.innerHTML = message.success)
-            .catch(()=> statusMessage2.innerHTML = message.loading.failure)
-            .then(clearInput)
-        });
-    }
-   
+                sendForm(form);
 
-    
+    }
+    mainFunc(form);
+    mainFunc(form2);
+
 });
