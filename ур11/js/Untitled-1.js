@@ -9,34 +9,26 @@ window.addEventListener('DOMContentLoaded', function() {
         
 
     function hideTabContent(a) {
-        let add = () => {
         for (let i = a; i < tabContent.length; i++) {
             tabContent[i].classList.remove('show');
             tabContent[i].classList.add('hide');
         }
     }
-    add();
-    }
 
     function showTabContent(b) {
-        let add = () => {
         if (tabContent[b].classList.contains('hide')) {
 
             tabContent[b].classList.remove('hide');
             tabContent[b].classList.add('show');
         }
-    }
-    add();
        
     }
     oneMone[0].addEventListener('click', function() {
-        let add = () => {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = "hidden";
-        }
-        add();
     });
+    
 
    
     
@@ -44,8 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     info.addEventListener('click', function(event) {
-        let add = () =>{
-        console.log("здесь");
+        console.log("здесь тут 2");
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for(let i = 0; i <tab.length; i++) {
@@ -66,8 +57,6 @@ window.addEventListener('DOMContentLoaded', function() {
             this.classList.add('more-splash');
             document.body.style.overflow = "hidden";
         });
-    }
-    add();
        
     });
 
@@ -137,32 +126,83 @@ window.addEventListener('DOMContentLoaded', function() {
             more.classList.remove('more-splash');
             document.body.style.overflow = "";
         });
-     //форма 
-     let massage = {
-        loading: 'Загрузка...',
-        success: 'Спасибо! Скоро мы с вами свяжемся',
-        failure: 'Что то пошло не так...'
-    };
 
-    let form = document.querySelector('.main-form'),
-        input = form.getElementsByTagName('input'),
-        statusMessage = document.createElement('div');
+        let message = {
+            loading: 'Загрузка...',
+            success: 'Спасибо! Мы с вами свяжемся',
+            failure: 'Что то не так'
 
-        statusMessage.classList.add('status'); 
+        };
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        form.appendChild(statusMessage);
+        let form = document.querySelector('.main-form'),
+            input = form.getElementsByTagName('input')[0],
+            statusMessage = document.createElement('div');
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+
+            statusMessage.classList.add('status');
+
         
-        let formData = new FormData(form);
-        request.send(formData); 
-    });
+        let form2 = document.getElementById('form'),
+            input2 = form2.getElementsByTagName('input'), 
+            statusMessage2 = document.createElement('div');
 
 
+            
+          
+           inp(input2[1]);
+           inp(input);
+
+
+            function inp(inpt) {
+                inpt.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^1-9]/g, '');
+                    });
+
+            }
+
+            statusMessage2.classList.add('status');
+
+    
+            function funkForm(formm) {
+                formm.addEventListener('submit', function(event) {
+
+                
+               
+                    event.preventDefault();
+                    formm.appendChild(statusMessage2);
+                    let request1 = new XMLHttpRequest();
+                    request1.open('POST', 'server.php');
+                    request1.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
+                    let formData2 = new FormData(formm);
+        
+                    let obj2 = {};
+        
+                    formData2.forEach(function(value, key){
+                        obj2[key] = value;
+                    });
+        
+                    let json2 = JSON.stringify(obj2);
+        
+                    request1.send(json2);
+                    
+                    request1.addEventListener('readystatechange', function() {
+                        if(request1.readyState < 4) {
+                            statusMessage2.innerHTML = message.loading;
+                        } else if(request1.readyState === 4 && request1.status == 200) {
+                            statusMessage2.innerHTML = message.success;
+                        } else {
+                            statusMessage2.innerHTML = message.failure;
+                        }
+                    });
+                    for (let i = 0; i < input2.length; i++ ) {
+                        input2[i].value = '';
+                    }
+            
+                });   
+            }
+            funkForm(form2);
+            funkForm(form);
   
 
 
