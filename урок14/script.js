@@ -1,17 +1,5 @@
-
 $(document).ready(function(){
-    $('.main_btna.text-center').on('click', function() {
-        $('.overlay').fadeToggle('slow');
-        $('.modal').css({top:'-200px'}).animate(
-            { 
-                height:'toggle',
-                top:'toggle',
-                top:'+=200'
-            }, 2000
-        );  
-       
-    });
-    $('.main_btn.text-center.contact').on('click', function() {
+    $('.main_btna, a[href="#sheldure"], .main_btn').on('click', function() {
         $('.overlay').fadeToggle('slow');
         $('.modal').css({top:'-200px'}).animate(
             { 
@@ -34,6 +22,7 @@ $(document).ready(function(){
         $('.overlay').fadeToggle('slow');   
 
     });
+   
 
     
 });
