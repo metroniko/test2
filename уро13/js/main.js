@@ -29,12 +29,6 @@ window.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = "hidden";
     });
     
-
-   
-    
-    
-
-
     info.addEventListener('click', function(event) {
         console.log("здесь тут 2");
         let target = event.target;
@@ -59,6 +53,7 @@ window.addEventListener('DOMContentLoaded', function() {
         });
        
     });
+    
 
     // таймер
     let deadline = '2018-10-21';
