@@ -1,10 +1,10 @@
 function tabs () {
-        let tab = document.querySelectorAll('.info-header-tab'),
-            info = document.querySelector('.info-header'),
-            tabContent = document.querySelectorAll('.info-tabcontent'),
-            j = 0,
-            oneMone = document.querySelectorAll(".description-btn");
-        hideTabContent(1);
+    let tab = document.querySelectorAll('.info-header-tab'),
+        info = document.querySelector('.info-header'),
+        tabContent = document.querySelectorAll('.info-tabcontent'),
+        j = 0,
+        oneMone = document.querySelectorAll(".description-btn");
+    hideTabContent(1);
         
 
     function hideTabContent(a) {

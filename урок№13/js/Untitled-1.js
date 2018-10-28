@@ -28,12 +28,6 @@ window.addEventListener('DOMContentLoaded', function() {
         this.classList.add('more-splash');
         document.body.style.overflow = "hidden";
     });
-    
-
-   
-    
-    
-
 
     info.addEventListener('click', function(event) {
         console.log("здесь тут 2");
@@ -129,7 +123,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         let message = {
             loading: 'Загрузка...',
-            success: 'Спасибо! Мы с y вами свяжемся',
+            success: 'Спасибо! Мы с y вами свяжемс',
             failure: 'Что то не так'
 
         };
@@ -164,44 +158,44 @@ window.addEventListener('DOMContentLoaded', function() {
         statusMessage2.classList.add('status');
 
     
-        function funkForm(formm) {
+    function funkForm(formm) {
                
-                formm.addEventListener('submit', function(event) {
+        formm.addEventListener('submit', function(event) {
 
-                let inputAll = formm.getElementsByTagName('input'); 
+        let inputAll = formm.getElementsByTagName('input'); 
 
-                event.preventDefault();
-                formm.appendChild(statusMessage2);
-                let request1 = new XMLHttpRequest();
-                request1.open('POST', 'server.php');
-                request1.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
-                let formData2 = new FormData(formm);
+        event.preventDefault();
+        formm.appendChild(statusMessage2);
+        let request1 = new XMLHttpRequest();
+        request1.open('POST', 'server.php');
+        request1.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
+        let formData2 = new FormData(formm);
         
-                let obj2 = {};
+        let obj2 = {};
         
-                formData2.forEach(function(value, key){
-                    obj2[key] = value;
-                });
+        formData2.forEach(function(value, key){
+            obj2[key] = value;
+        });
         
-                let json2 = JSON.stringify(obj2);
+        let json2 = JSON.stringify(obj2);
         
-                request1.send(json2);
+        request1.send(json2);
                     
-                request1.addEventListener('readystatechange', function() {
-                     if(request1.readyState < 4) {
-                         statusMessage2.innerHTML = message.loading;
-                    } else if(request1.readyState === 4 && request1.status == 200) {
-                        statusMessage2.innerHTML = message.success;
-                    } else {
-                        statusMessage2.innerHTML = message.failure;
-                    }
-                });
-                for (let i = 0; i < inputAll.length; i++ ) {
-                    inputAll[i].value = '';
-                }
-            
-            });   
+        request1.addEventListener('readystatechange', function() {
+                if(request1.readyState < 4) {
+                statusMessage2.innerHTML = message.loading;
+            } else if(request1.readyState === 4 && request1.status == 200) {
+                statusMessage2.innerHTML = message.success;
+            } else {
+                statusMessage2.innerHTML = message.failure;
+            }
+        });
+        for (let i = 0; i < inputAll.length; i++ ) {
+            inputAll[i].value = '';
         }
+            
+    });   
+    }
     funkForm(form2);
     funkForm(form);
 
@@ -213,107 +207,106 @@ window.addEventListener('DOMContentLoaded', function() {
         dotsWrap = document.querySelector('.slider-dots'),
         dots = document.querySelectorAll('.dot');
 
-        showSlides(1);
+    showSlides(1);
     
-        function showSlides(n) {
-            if (n > slides.length) {
-                slideIndex = 1;
-            }
-            if (n < 1) {
-                slideIndex = slides.length;
-            } 
+    function showSlides(n) {
+        if (n > slides.length) {
+             slideIndex = 1;
+        }
+        if (n < 1) {
+            slideIndex = slides.length;
+        } 
 
-            slides.forEach((item) => item.style.display = 'none');
-            // for (let i = 0; i < slides.length; i++) {
-            //     slides[i].style.display = 'none';
-            // }
-            dots.forEach((item) => item.classList.remove('dot-active'));
+        slides.forEach((item) => item.style.display = 'none');
+        // for (let i = 0; i < slides.length; i++) {
+        //     slides[i].style.display = 'none';
+         // }
+        dots.forEach((item) => item.classList.remove('dot-active'));
 
-            slides[slideIndex - 1].style.display = 'block';
-            dots[slideIndex - 1].classList.add('dot-active');
+        slides[slideIndex - 1].style.display = 'block';
+        dots[slideIndex - 1].classList.add('dot-active');
           
-        }
+    }
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
 
-        prev.addEventListener('click', function() {
-            plusSlides(-1); 
-        });
+    prev.addEventListener('click', function() {
+        plusSlides(-1); 
+    });
 
-        next.addEventListener('click', function() {
-            plusSlides(1);
-        });
+    next.addEventListener('click', function() {
+        plusSlides(1);
+    });
 
-        dotsWrap.addEventListener('click', function(event) {
-            for (let i = 0; i < dots.length + 1; i++) {
-                if (event.target.classList.contains('dot') && event.target == dots[i-1]) {
-                    currentSlide(i);
-                }
+    dotsWrap.addEventListener('click', function(event) {
+        for (let i = 0; i < dots.length + 1; i++) {
+            if (event.target.classList.contains('dot') && event.target == dots[i-1]) {
+                currentSlide(i);
             }
-        });
-        //калькулятор
+        }
+    });
+    //калькулятор
         
-        let persons = document.querySelectorAll('.counter-block-input')[0],
-            restDays = document.querySelectorAll('.counter-block-input')[1],
-            place = document.getElementById('select'),
-            totalValue = document.getElementById('total'),
-            personsSum = 0,
-            daysSum = 0,
-            total = 0;
+    let persons = document.querySelectorAll('.counter-block-input')[0],
+        restDays = document.querySelectorAll('.counter-block-input')[1],
+        place = document.getElementById('select'),
+        totalValue = document.getElementById('total'),
+        personsSum = 0,
+        daysSum = 0,
+        total = 0;
             
-            totalValue.innerHTML = 0;
+        totalValue.innerHTML = 0;
       
-        persons.addEventListener('input', function() {
-            this.value = this.value.replace('3', '5');  
-            this.value = this.value.replace('-', '5');                    
-            personsSum = +this.value;
-            total = (daysSum + personsSum)*4000;
-            if(personsSum != Math.floor(personsSum)) {
-                console.log("нельзя");
+    persons.addEventListener('input', function() {
+        this.value = this.value.replace(/[^1-9]/g, '');                  
+        personsSum = +this.value;
+        total = (daysSum + personsSum)*4000;
+        // if(personsSum != Math.floor(personsSum)) {
+        //     console.log("нельзя");
                 
-                persons.value = '';    
-            }  
-            if(restDays.value == '' || persons.value == '') {
-                totalValue.innerHTML = 0;
-            } else {
-                totalValue.innerHTML = total;
-            }  
+        //     persons.value = '';    
+        // }  
+        if(restDays.value == '' || persons.value == '') {
+            totalValue.innerHTML = 0;
+        } else {
+            totalValue.innerHTML = total;
+        }  
            
-        });
+    });
     
-        restDays.addEventListener('input', function() {
-            this.value = this.value.replace('3', '5');  
-            this.value = this.value.replace('-', '5'); 
+    restDays.addEventListener('input', function() {
+
+        this.value = this.value.replace(/[^1-9]/g, '');
               
-            daysSum = +this.value;
+        daysSum = +this.value;
            
-            total = (daysSum + personsSum)*4000;
+        total = (daysSum + personsSum)*4000;
 
-            if(persons.value == '' || restDays.value == '') {
-                totalValue.innerHTML = 0;
-            } else {
-                totalValue.innerHTML = total;
-            }
-            if(daysSum != Math.floor(daysSum)) {
-                daysSum = 0;
-                console.log("нельзя");
-                restDays.value = '';
+        if(persons.value == '' || restDays.value == '') {
+            totalValue.innerHTML = 0;
+        } else {
+            totalValue.innerHTML = total;
+        }
+        // if(daysSum != Math.floor(daysSum)) {
+        //     daysSum = 0;
+        //     console.log("нельзя");
+        //     restDays.value = '';
                 
-            }
-        });
+        // }
+    });
 
-            place.addEventListener('change', function() {
-                if(persons.value == '' || restDays.value == '') {
-                    totalValue.innerHTML = 0;
-                } else {
-                    let a = total;
-                    totalValue.innerHTML = a * this.options[this.selectedIndex].value;
-                }
-        });
+    place.addEventListener('change', function() {
+        if(persons.value == '' || restDays.value == '') {
+            totalValue.innerHTML = 0;
+        } else {
+            let a = total;
+            totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+        }
+    });
      
 });
