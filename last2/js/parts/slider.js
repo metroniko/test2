@@ -1,4 +1,4 @@
-function slider() {
+export default function slider() {
     // slider
     let slideIndex = 1,//слайдер в текущий момент
         slides = document.querySelectorAll('.slider-item'),
@@ -52,4 +52,3 @@ function slider() {
         }
     });
 }
-module.exports = slider;

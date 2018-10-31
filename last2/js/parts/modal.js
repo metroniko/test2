@@ -1,4 +1,4 @@
-function modal () {
+export default function modal () {
     let more = document.querySelector(".more"),
     overlay = document.querySelector(".overlay"),
     close = document.querySelector(".popup-close");
@@ -16,4 +16,4 @@ function modal () {
         document.body.style.overflow = "";
     });
 }
-module.exports = modal;
+

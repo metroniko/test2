@@ -1,4 +1,4 @@
-function forms () {
+export default function forms () {
     let message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Мы с y вами свяжемс',
@@ -77,4 +77,3 @@ function forms () {
     funkForm(form2);
     funkForm(form);
 }
-module.exports = forms;

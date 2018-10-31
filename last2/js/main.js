@@ -59,7 +59,8 @@ window.addEventListener('DOMContentLoaded', function() {
     let deadline = '2018-11-6';
     //рассчёт времемени до дедлайна
     function getTimeRemaining(endtime) {
-        let t = Date.parse(endtime)-Date.parse(new Date),
+        let dataY = new Date().getTimezoneOffset(),
+        t = Date.parse(endtime)-Date.parse(new Date()) + (dataY * 60 * 1000),
         seconds = Math.floor((t/1000) % 60),
         minutes = Math.floor((t/1000/60) % 60),
         hours = Math.floor(t/(1000*60*60));
@@ -67,10 +68,12 @@ window.addEventListener('DOMContentLoaded', function() {
             if (time < 10) {
                 time = '0' + time;
             }
+        return time;    
         }
-        timeAdd (seconds);
-        timeAdd (minutes);
-        timeAdd (hours);    
+
+        seconds = timeAdd (seconds);
+        minutes = timeAdd (minutes);
+        hours = timeAdd (hours);    
         return {
             'total' : t,
             'seconds' : seconds,
@@ -102,6 +105,7 @@ window.addEventListener('DOMContentLoaded', function() {
         }    
     }
     setClock ('timer', deadline);
+    
 
     // modal
     let more = document.querySelector(".more"),

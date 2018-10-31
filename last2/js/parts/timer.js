@@ -1,4 +1,4 @@
-function timer() {
+export default function timer() {
     // таймер
     let deadline = '2018-11-6';
     //рассчёт времемени до дедлайна
@@ -16,7 +16,7 @@ function timer() {
         }
 
         seconds = timeAdd (seconds);
-        mitutes = timeAdd (minutes);
+        minutes = timeAdd (minutes);
         hours = timeAdd (hours);    
         return {
             'total' : t,
@@ -51,4 +51,3 @@ function timer() {
     setClock ('timer', deadline);
     
 }
-module.exports = timer;
