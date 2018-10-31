@@ -3,7 +3,8 @@ function timer() {
     let deadline = '2018-11-6';
     //рассчёт времемени до дедлайна
     function getTimeRemaining(endtime) {
-        let t = Date.parse(endtime)-Date.parse(new Date),
+        let dataY = new Date().getTimezoneOffset(),
+         t = Date.parse(endtime)-Date.parse(new Date()) + (dataY * 60 * 1000),
         seconds = Math.floor((t/1000) % 60),
         minutes = Math.floor((t/1000/60) % 60),
         hours = Math.floor(t/(1000*60*60));
@@ -11,10 +12,12 @@ function timer() {
             if (time < 10) {
                 time = '0' + time;
             }
+        return time;    
         }
-        timeAdd (seconds);
-        timeAdd (minutes);
-        timeAdd (hours);    
+
+        seconds = timeAdd (seconds);
+        mitutes = timeAdd (minutes);
+        hours = timeAdd (hours);    
         return {
             'total' : t,
             'seconds' : seconds,
