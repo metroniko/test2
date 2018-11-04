@@ -88,8 +88,11 @@ window.addEventListener('DOMContentLoaded', function() {
     console.log(modalPopup);
     console.log(numberButton);
     orderCall(numberButton[0]);
-    orderCall(numberButton[1]);
-    
+
+    numberButton[1].addEventListener("click", function(e) {
+        e.preventDefault();
+        showModal(modalPopup);
+    });
     
     popupCloseCall.addEventListener("click", function() {
         hideModal(modalPopup);
@@ -256,7 +259,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     setClock ('timer', deadline);
 
-    /////////////////////увеличение картинок 
+    ///////////////////////увеличение картинок 
    let pictureBlock = document.querySelectorAll(".col-lg-3"),//с 4 по 11
        body = document.getElementsByTagName("body")[0], 
        modalNew = document.createElement('div'),
@@ -308,18 +311,37 @@ window.addEventListener('DOMContentLoaded', function() {
     bigPicture(pictureBlock[9]);
     bigPicture(pictureBlock[10]);
     bigPicture(pictureBlock[11]);
+
     ////////////////////////////////калькулятор
     let price = document.querySelectorAll(".glazing_price_btn"),
         calc = document.querySelector(".popup_calc"),
+        calcClose = calc.getElementsByTagName("button")[0],
+        widthCalc = calc.getElementsByTagName("input"),
         balconIcons = document.querySelectorAll(".balcon_icons")[0],
         bigImgAll = document.querySelector(".big_img"),
         bigImg = bigImgAll.getElementsByTagName("img"),
+        calcNext = calc.getElementsByTagName("button")[1],
+        calcChoose = document.querySelectorAll(".popup_calc_profile")[0],
+        place = calcChoose.getElementsByTagName('select')[0],
+        checkboxCustom = calcChoose.querySelectorAll(".checkbox-custom"),
+        checkboxCustomExit = calcChoose.getElementsByTagName("button")[0],
+        checkboxCustomNext = calcChoose.getElementsByTagName("button")[1],
+        calcChooseEnd = document.querySelector(".popup_calc_end"),
+        calcChooseEndInput1 = calcChooseEnd.querySelectorAll("input")[1],
+        calcChooseEndForm = calcChooseEnd.querySelector(".form"),
+        calcChooseEndExit = calcChooseEnd.querySelector(".popup_calc_end_close"),
         minPic = balconIcons.getElementsByTagName("a");
 
-    console.log(minPic);
-    console.log(bigImg);    
+    console.log(calcChooseEndExit);
+    console.log(calcChooseEndInput1);
+       
 
-    price[0].addEventListener("click", function() {
+    price[0].addEventListener("click", function(e) {
+        
+        showModal(calc);
+    });
+    price[1].addEventListener("click", function(e) {
+        
         showModal(calc);
     });
     calcMove(minPic[0]);
@@ -327,13 +349,14 @@ window.addEventListener('DOMContentLoaded', function() {
     calcMove(minPic[2]);
     calcMove(minPic[3]);
     
-    function calcMove (pikch){
+    function calcMove (pikch){//увеличение и скрытие картинок
         pikch.addEventListener('click', function(event) {
+            event.preventDefault();
             let target = event.target;
-            console.log(target);
+            
             console.log(pikch.getElementsByTagName("img")[0]);
             let pictureCopy = pikch.getElementsByTagName("img")[0];
-            console.log("вот1");
+           
 
             for(let i = 0; i < minPic.length; i++) {
                 if (target == minPic[i].getElementsByTagName("img")[0]) {
@@ -345,12 +368,20 @@ window.addEventListener('DOMContentLoaded', function() {
          
             for(let i = 0; i < minPic.length; i++) {
                 let pictureCopy = minPic[i].getElementsByTagName("img")[0];
-                pictureCopy.style.height = "40px";
-                pictureCopy.style.width = "60px";
+                pictureCopy.style.height = "55px";
+                pictureCopy.style.width = "75px";
 
             }
             pictureCopy.style.height = "70px";
-            pictureCopy.style.width = "120px";       
+            pictureCopy.style.width = "120px";
+            bigImgAll.style.margin = "auto";
+            bigImgAll.style.height = "250px";
+            bigImgAll.style.width = "300px";
+
+            for(let i = 0; i < minPic.length; i++) {
+                bigImg[i].style.verticalalign = "middle" ; 
+            }
+                  
         });
     }
 
@@ -364,7 +395,124 @@ window.addEventListener('DOMContentLoaded', function() {
     function ShowBigPic(i) {
         bigImg[i].classList.remove('hide');
         bigImg[i].classList.add('show');
-    }   
+    }
+   
+
+    let appData = {
+        material:"tree",
+        cold:false,
+        hot:false
+    }
+    //для заполнения 
+
+    console.log(appData);
+    widthCalc[0].addEventListener('input', function() {//ввод ширины
+        this.value = this.value.replace(/[^1-9]/g, '');
+        let item = widthCalc[0].value;
+        appData.width = item; 
+    });
+
+    widthCalc[1].addEventListener('input', function() {//ввод высоты
+        this.value = this.value.replace(/[^1-9]/g, '');
+        let item = widthCalc[1].value;
+        appData.height = item;
+    });
+    calcClose.addEventListener('click', function() {//очистка при нажатии крестика 
+        clearApp();
+        hideModal(calc);
+    });
+
+    calcNext.addEventListener('click', function() {
+        hideModal(calc);
+        showModal(calcChoose);
+    })
+
+    place.addEventListener('change', function () {
+        
+        appData.material = this.options[this.selectedIndex].value;
+       console.log(appData);
+    });
+    checkboxCustom[0].addEventListener("click", function(event) {//проверка холодного бокса
+        if(appData.hot == false && appData.cold == false ) {
+            appData.cold = true;
+        } else if(appData.hot == false && appData.cold == true) {
+            appData.cold = false;
+        } else {
+            event.preventDefault();
+        }
+       
+        
+         
+    })
+    checkboxCustom[1].addEventListener("click", function(event) {//проверка холодного бокса
+        if(appData.hot == false && appData.cold == false ) {
+            appData.hot = true;
+        } else if(appData.cold == false && appData.hot == true) {
+            appData.hot = false;
+        } else {
+            event.preventDefault();
+        }
+    
+    })
+    checkboxCustomExit.addEventListener("click", function() {
+        clearApp();
+        hideModal(calcChoose);
+        console.log(appData)
+    })
+    checkboxCustomNext.addEventListener("click", function() {
+        hideModal(calcChoose);
+        showModal(calcChooseEnd);
+    })
+    function clearApp() {//очистка объекта
+        for(let key in appData) {
+            appData[key] = null;
+        }
+    }
+
+    
+    checkInput(calcChooseEndInput1);   
+    
+    calcChooseEndForm.addEventListener('submit', function(event) {
+            
+
+        let inputAll = calcChooseEndForm.getElementsByTagName('input');//получение того же инпута для его последующей очистки 
+
+        event.preventDefault();//отмена стандортного поведениябраузера
+        calcChooseEndForm.appendChild(statusMessage);
+        let request1 = new XMLHttpRequest();//создание запроса
+        request1.open('POST', 'server.php');//настройка ajax запроса
+        request1.setRequestHeader ('Content-Type', 'application/json; charset=utf-8');
+        let formData = new FormData(calcChooseEndForm);
+    
+        let obj = {};
+    
+        formData.forEach(function(value, key){//ключ в вёрстке
+            obj[key] = value;
+        });
+        obj["sds"] = appData; 
+        let json = JSON.stringify(obj);
+    
+        request1.send(json);
+                
+        request1.addEventListener('readystatechange', function() {
+            
+            if(request1.readyState < 4) {
+                statusMessage.innerHTML = message.loading;
+            } else if(request1.readyState === 4 && request1.status == 200) {
+                statusMessage.innerHTML = message.success;
+            } else {
+                statusMessage.innerHTML = message.failure;
+            }
+        });
+        for (let i = 0; i < inputAll.length; i++ ) {
+            inputAll[i].value = '';
+        }
+        clearApp();    
+    });
+    calcChooseEndExit.addEventListener("click", function() {
+        hideModal(calcChooseEnd);
+        clearApp();
+    })
 })
 
 
