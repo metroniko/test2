@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', function() {
-    // 'use strict';
+    'use strict';
     //табы
     let info = document.querySelectorAll(".decoration_slider")[0],//дочерний для табов
         tab = document.querySelectorAll(".decoration_item"),//таб
@@ -8,11 +8,31 @@ window.addEventListener('DOMContentLoaded', function() {
         internal = document.querySelector(".internal"),
         rising = document.querySelector(".rising"),
         roof = document.querySelector(".roof"),
-        external = document.querySelector(".external");
+        external = document.querySelector(".external"),
+        formRising = rising.querySelector(".form"),
+        formRoof = roof.querySelector(".form"),
+        formExternal = external.querySelector(".form"),
+        formInternal = internal.querySelector(".form"),
+        inputRising = rising.querySelectorAll("input")[1],
+        inputRoof = roof.querySelectorAll("input")[1],
+        inputExternal = external.querySelectorAll("input")[1],
+        inputInternal = internal.querySelectorAll("input")[1];
     let mass = [internal,rising,roof,external];    
 
-    console.log(tabContent);
+    console.log(formInternal);
+    console.log(formRising);
+    console.log(formRoof);
+    console.log(formExternal);
 
+    checkInput(inputRising);
+    checkInput(inputRoof);
+    checkInput(inputExternal);
+    checkInput(inputInternal);
+
+    funkForm(formInternal);
+    funkForm(formRising);
+    funkForm(formRoof);
+    funkForm(formExternal);
     info.addEventListener("click", function(e) {
         let target = e.target;
         for(let i = 0; i < tab.length; i++) {
@@ -266,7 +286,8 @@ window.addEventListener('DOMContentLoaded', function() {
        modalNew = document.createElement('div'),
        modalNext = document.createElement('div'),
        image = document.createElement('img');
-       modalNext2 = document.createElement('div'); 
+
+    let modalNext2 = document.createElement('div'); 
      
     
     console.log(pictureBlock);
@@ -324,7 +345,7 @@ window.addEventListener('DOMContentLoaded', function() {
         calcNext = calc.getElementsByTagName("button")[1],
         calcChoose = document.querySelectorAll(".popup_calc_profile")[0],
         place = calcChoose.getElementsByTagName('select')[0],
-        checkboxCustom = calcChoose.getElementsByTagName("input");
+        checkboxCustom = calcChoose.getElementsByTagName("input"),
         checkboxCustomExit = calcChoose.getElementsByTagName("button")[0],
         checkboxCustomNext = calcChoose.getElementsByTagName("button")[1],
         calcChooseEnd = document.querySelector(".popup_calc_end"),
@@ -525,7 +546,9 @@ window.addEventListener('DOMContentLoaded', function() {
     ////////////////////////Табы с окнами
     let windowPicrute = document.querySelectorAll(".row"),//c 3 по 7 включительно
         windowTab = document.querySelectorAll(".glazing_block");
-    console.log(windowPicrute[3]);
+    console.log(windowPicrute);
+    console.log(windowTab);
+    
     windowWithTabs(windowTab[0]);
     windowWithTabs(windowTab[1]);
     windowWithTabs(windowTab[2]);
@@ -534,7 +557,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     function windowWithTabs(a) {
             a.addEventListener("click", function(e) {
-            target = e.target;
+            let target = e.target;
             console.log(target);
             for(let i = 0; i < windowTab.length; i++) {
                 if (target == windowTab[i].querySelector("a")) {
