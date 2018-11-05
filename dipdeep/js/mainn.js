@@ -35,8 +35,12 @@ window.addEventListener('DOMContentLoaded', function() {
     funkForm(formExternal);
     info.addEventListener("click", function(e) {
         let target = e.target;
+        console.log(target);
         for(let i = 0; i < tab.length; i++) {
             if (target == tab[i].getElementsByTagName("div")[0] || target == tab[i].getElementsByTagName("a")[0]) {
+                // tab[i].getElementsByTagName("a")[0].classList.add("focus");
+                // tab[i].getElementsByTagName("a")[0].classList.add("hover");
+                tab[i].getElementsByTagName("a")[0].focus();
                 removeClassAfter_click();
                 addClassAfter_click(i);
                 hideTabContent();
@@ -166,7 +170,7 @@ window.addEventListener('DOMContentLoaded', function() {
     function checkInput(inpt) {//функция для проверки значения вводимых в инпут с номером
         inpt.addEventListener('input', function() {
             
-            this.value = "+" + this.value.replace(/[^1-9]/g, '');   
+            this.value = "+" + this.value.replace(/[^0-9]/g, '');   
         });
     }
     statusMessage.classList.add('status');
@@ -427,7 +431,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     console.log(appData);
     widthCalc[0].addEventListener('input', function() {//ввод ширины
-        this.value = this.value.replace(/[^1-9]/g, '');
+        this.value = this.value.replace(/[^0-9]/g, '');
         let item = widthCalc[0].value;
         appData.width = item; 
     });
@@ -438,7 +442,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     widthCalc[1].addEventListener('input', function() {//ввод высоты
-        this.value = this.value.replace(/[^1-9]/g, '');
+        this.value = this.value.replace(/[^0-9]/g, '');
         let item = widthCalc[1].value;
         appData.height = item;
     });
@@ -545,30 +549,32 @@ window.addEventListener('DOMContentLoaded', function() {
     })
     ////////////////////////Табы с окнами
     let windowPicrute = document.querySelectorAll(".row"),//c 3 по 7 включительно
+        glazingSlider = document.querySelectorAll(".glazing_slider")[0],
         windowTab = document.querySelectorAll(".glazing_block");
-    console.log(windowPicrute);
+    console.log(glazingSlider);
     console.log(windowTab);
     
-    windowWithTabs(windowTab[0]);
-    windowWithTabs(windowTab[1]);
-    windowWithTabs(windowTab[2]);
-    windowWithTabs(windowTab[3]);
-    windowWithTabs(windowTab[4]);
+    // windowWithTabs(windowTab[0]);
+    // windowWithTabs(windowTab[1]);
+    // windowWithTabs(windowTab[2]);
+    // windowWithTabs(windowTab[3]);
+    // windowWithTabs(windowTab[4]);
 
-    function windowWithTabs(a) {
-            a.addEventListener("click", function(e) {
-            let target = e.target;
-            console.log(target);
-            for(let i = 0; i < windowTab.length; i++) {
-                if (target == windowTab[i].querySelector("a")) {
-                    removeClass();
-                    addClass(i);
-                    hideWindow(i);
-                    showWindow(i+3)
-                }
-            }
-        });
-    }
+    // function windowWithTabs(a) {
+    //     a.addEventListener("click", function(e) {
+    //         let target = e.target;
+    //         console.log(target);
+    //         for(let i = 0; i < windowTab.length; i++) {
+    //             if (target == windowTab[i].querySelector("a") || target == windowTab[i] || target == windowTab[i].querySelector("img") ) {
+    //                 windowTab[i].querySelector("a").focus();
+    //                 removeClass();
+    //                 addClass(i);
+    //                 hideWindow(i);
+    //                 showWindow(i+3)
+    //             }
+    //         }
+    //     });
+    // }
     function removeClass() {
         for(let i = 0; i < windowTab.length; i++) {
             windowTab[i].querySelector("a").classList.remove("active");
@@ -587,6 +593,21 @@ window.addEventListener('DOMContentLoaded', function() {
         windowPicrute[i].classList.remove("hide");
         windowPicrute[i].classList.add("show");
     }
+    glazingSlider.addEventListener("click", function(e) {
+        let target = e.target;
+        console.log(target);
+        for(let i = 0; i < windowTab.length; i++) {
+            if (target == windowTab[i].querySelector("a") || target == windowTab[i] || target == windowTab[i].querySelector("img") ) {
+                windowTab[i].querySelector("a").focus();
+                removeClass();
+                addClass(i);
+                hideWindow(i);
+                showWindow(i+3)
+            }
+        }
+        
+
+    })
 })
 
 
