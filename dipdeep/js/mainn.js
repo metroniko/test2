@@ -1,48 +1,49 @@
 window.addEventListener('DOMContentLoaded', function() {
     // 'use strict';
-    // //табы
-    // let info = document.querySelectorAll(".decoration_slider")[0],//дочерний для табов
-    //     tab = document.querySelectorAll(".decoration_item"),//таб
-    //     tabContent = document.querySelectorAll(".decoration_content");//инфа на табе
-    // console.log(info);
-    // console.log(tab);
-    // console.log(tabContent);
-     
-    // function hideTabContent(a) { // скрытие табов
-    //     for (let i = a; i < tabContent.length; i++) {
-    //         tabContent[i].classList.remove('show');
-    //         tabContent[i].classList.add('hide');
-    //     }
-    // }
-  
-    //    function showTabContent(b) {//показывает табы
-    //     if (tabContent[b].classList.contains('hide')) {
+    //табы
+    let info = document.querySelectorAll(".decoration_slider")[0],//дочерний для табов
+        tab = document.querySelectorAll(".decoration_item"),//таб
+        tabContentAll = document.querySelectorAll(".decoration_content")[0],
+        tabContent = tabContentAll.getElementsByClassName("row")[0],//инфа на табе
+        internal = document.querySelector(".internal"),
+        rising = document.querySelector(".rising"),
+        roof = document.querySelector(".roof"),
+        external = document.querySelector(".external");
+    let mass = [internal,rising,roof,external];    
 
-    //         tabContent[b].classList.remove('hide');
-    //         tabContent[b].classList.add('show');
-    //     }
-       
-    // }
-    // info.addEventListener('click', function(event) {
+    console.log(tabContent);
+
+    info.addEventListener("click", function(e) {
+        let target = e.target;
+        for(let i = 0; i < tab.length; i++) {
+            if (target == tab[i].getElementsByTagName("div")[0] || target == tab[i].getElementsByTagName("a")[0]) {
+                removeClassAfter_click();
+                addClassAfter_click(i);
+                hideTabContent();
+                showTabContent(i);
+            }
+        }
         
-    //     console.log(event.target);
-    //     let target = event.target;
-        
-                
-    //     if (target && target.classList.contains('decoration_item')) {
-    //         console.log("здесь тут 3");
-    //         for(let i = 0; i < tab.length; i++) {
-                
-    //             if(target == tab[i]) {
-    //                 hideTabContent(0);
-    //                 showTabContent(i);
-    //                 break;   
-    //             }
-    //         }
-    //     }
-       
-   
-    // });
+    });
+    function removeClassAfter_click() {
+        for(let i = 0; i < tab.length; i++) {
+            tab[i].getElementsByTagName("div")[0].classList.remove("after_click");
+        }
+    }
+    function addClassAfter_click(i) {
+        tab[i].getElementsByTagName("div")[0].classList.add("after_click");
+    }
+    function hideTabContent() {
+        for(let i = 0; i < tab.length; i++) {
+            mass[i].classList.remove("show");
+            mass[i].classList.add("hide");
+        }
+    }
+    function showTabContent(i) {
+        mass[i].classList.remove("hide");
+        mass[i].classList.add("show");
+    }
+
     /////////////////////////вызов окна наверху popup_engineer
 
     let modalHead = document.getElementsByClassName("header_btn_wrap")[0],//верхняя кнопка
@@ -323,27 +324,27 @@ window.addEventListener('DOMContentLoaded', function() {
         calcNext = calc.getElementsByTagName("button")[1],
         calcChoose = document.querySelectorAll(".popup_calc_profile")[0],
         place = calcChoose.getElementsByTagName('select')[0],
-        checkboxCustom = calcChoose.querySelectorAll(".checkbox-custom"),
+        checkboxCustom = calcChoose.getElementsByTagName("input");
         checkboxCustomExit = calcChoose.getElementsByTagName("button")[0],
         checkboxCustomNext = calcChoose.getElementsByTagName("button")[1],
         calcChooseEnd = document.querySelector(".popup_calc_end"),
         calcChooseEndInput1 = calcChooseEnd.querySelectorAll("input")[1],
+        calcChooseEndInputAll = calcChooseEnd.querySelectorAll("input"),
         calcChooseEndForm = calcChooseEnd.querySelector(".form"),
         calcChooseEndExit = calcChooseEnd.querySelector(".popup_calc_end_close"),
         minPic = balconIcons.getElementsByTagName("a");
 
-    console.log(calcChooseEndExit);
-    console.log(calcChooseEndInput1);
-       
+    console.log(calcChoose);
+    function countPrice () {
+        for ( let i = 0; i < price.length; i++) {
+            price[i].addEventListener("click", function(e) {
+        
+                showModal(calc);
+            });
 
-    price[0].addEventListener("click", function(e) {
-        
-        showModal(calc);
-    });
-    price[1].addEventListener("click", function(e) {
-        
-        showModal(calc);
-    });
+        }
+    }
+    countPrice ();
     calcMove(minPic[0]);
     calcMove(minPic[1]);
     calcMove(minPic[2]);
@@ -400,8 +401,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
     let appData = {
         material:"tree",
-        cold:false,
-        hot:false
     }
     //для заполнения 
 
@@ -411,6 +410,11 @@ window.addEventListener('DOMContentLoaded', function() {
         let item = widthCalc[0].value;
         appData.width = item; 
     });
+    function clearInput (a) {
+        for (let i = 0; i < a.length; i++ ) {
+            a[i].value = '';
+        }
+    }
 
     widthCalc[1].addEventListener('input', function() {//ввод высоты
         this.value = this.value.replace(/[^1-9]/g, '');
@@ -420,6 +424,7 @@ window.addEventListener('DOMContentLoaded', function() {
     calcClose.addEventListener('click', function() {//очистка при нажатии крестика 
         clearApp();
         hideModal(calc);
+        clearInput(widthCalc);
     });
 
     calcNext.addEventListener('click', function() {
@@ -432,32 +437,33 @@ window.addEventListener('DOMContentLoaded', function() {
         appData.material = this.options[this.selectedIndex].value;
        console.log(appData);
     });
+    console.log(checkboxCustom[0]);
     checkboxCustom[0].addEventListener("click", function(event) {//проверка холодного бокса
-        if(appData.hot == false && appData.cold == false ) {
-            appData.cold = true;
-        } else if(appData.hot == false && appData.cold == true) {
-            appData.cold = false;
-        } else {
-            event.preventDefault();
-        }
-       
-        
-         
+        checkboxCustom[0].checked = true;
+        checkboxCustom[1].checked = false;
+        console.log(checkboxCustom[0].checked);
+        console.log(checkboxCustom[1].checked);
+        appData.weather = "cold";
     })
-    checkboxCustom[1].addEventListener("click", function(event) {//проверка холодного бокса
-        if(appData.hot == false && appData.cold == false ) {
-            appData.hot = true;
-        } else if(appData.cold == false && appData.hot == true) {
-            appData.hot = false;
-        } else {
-            event.preventDefault();
-        }
+    checkboxCustom[1].addEventListener("click", function(event) {//проверка горячего бокса
+        checkboxCustom[1].checked = true;
+        checkboxCustom[0].checked = false;
+        console.log(checkboxCustom[1].checked);
+        console.log(checkboxCustom[0].checked);
+        appData.weather = "hot";
     
     })
+    function checkboxCustomClear() {
+        checkboxCustom[0].checked = false;
+        checkboxCustom[1].checked = false;
+    }
     checkboxCustomExit.addEventListener("click", function() {
         clearApp();
         hideModal(calcChoose);
-        console.log(appData)
+        console.log(appData);
+        checkboxCustomClear()
+        clearInput(widthCalc);
+
     })
     checkboxCustomNext.addEventListener("click", function() {
         hideModal(calcChoose);
@@ -512,7 +518,52 @@ window.addEventListener('DOMContentLoaded', function() {
     calcChooseEndExit.addEventListener("click", function() {
         hideModal(calcChooseEnd);
         clearApp();
+        clearInput(calcChooseEndInputAll);
+        checkboxCustomClear()
+        clearInput(widthCalc);
     })
+    ////////////////////////Табы с окнами
+    let windowPicrute = document.querySelectorAll(".row"),//c 3 по 7 включительно
+        windowTab = document.querySelectorAll(".glazing_block");
+    console.log(windowPicrute[3]);
+    windowWithTabs(windowTab[0]);
+    windowWithTabs(windowTab[1]);
+    windowWithTabs(windowTab[2]);
+    windowWithTabs(windowTab[3]);
+    windowWithTabs(windowTab[4]);
+
+    function windowWithTabs(a) {
+            a.addEventListener("click", function(e) {
+            target = e.target;
+            console.log(target);
+            for(let i = 0; i < windowTab.length; i++) {
+                if (target == windowTab[i].querySelector("a")) {
+                    removeClass();
+                    addClass(i);
+                    hideWindow(i);
+                    showWindow(i+3)
+                }
+            }
+        });
+    }
+    function removeClass() {
+        for(let i = 0; i < windowTab.length; i++) {
+            windowTab[i].querySelector("a").classList.remove("active");
+        }
+    }
+    function addClass(i) {
+        windowTab[i].querySelector("a").classList.add("active");
+    }
+    function hideWindow() {
+        for(let i = 3; i < (windowTab.length + 3); i++) {
+            windowPicrute[i].classList.remove("show");
+            windowPicrute[i].classList.add("hide");
+        }
+    }
+    function showWindow(i) {
+        windowPicrute[i].classList.remove("hide");
+        windowPicrute[i].classList.add("show");
+    }
 })
 
 
