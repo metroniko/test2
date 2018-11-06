@@ -180,11 +180,6 @@ window.addEventListener('DOMContentLoaded', function() {
     checkInput(inputMain2[1]);
     checkInput(inputMain3[1]);
     checkInput(inputTimePopup[1]);
-    console.log(popupForm);
-    console.log(mainForm);
-    console.log(mainForm2);
-    console.log(mainForm3);
-    console.log(timePopup);
 
 
     function funkForm(formm) {//функция для отправки ajax запроса
